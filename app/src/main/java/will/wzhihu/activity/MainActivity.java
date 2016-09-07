@@ -1,9 +1,11 @@
-package will.wzhihu;
+package will.wzhihu.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class MainActivity extends AppCompatActivity {
+import will.wzhihu.R;
+import will.wzhihu.common.activity.BaseActivity;
+
+public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

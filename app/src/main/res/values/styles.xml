@@ -3,9 +3,56 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:buttonStyle">@style/Widget.WZhiHu.Button</item>
+        <item name="android:fragmentOpenEnterAnimation">@anim/slide_left_in</item>
+        <item name="android:fragmentOpenExitAnimation">@anim/slide_left_out</item>
+        <item name="android:fragmentCloseEnterAnimation">@anim/slide_right_in</item>
+        <item name="android:fragmentCloseExitAnimation">@anim/slide_right_out</item>
+        <item name="android:fragmentFadeEnterAnimation">@anim/fade_in</item>
+        <item name="android:fragmentFadeExitAnimation">@anim/fade_out</item>
+        <item name="android:windowAnimationStyle">@style/ActivityTransitionAnim</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ActivityTransitionAnim">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="Divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="Widget.WZhiHu.TextView" parent="">
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="Widget.WZhiHu.TextView.Title" parent="Widget.WZhiHu.TextView">
+        <item name="android:textSize">24sp</item>
+        <item name="android:padding">16dp</item>
+    </style>
+
+    <style name="Widget.WZhiHu.TextView.Subtext" parent="Widget.WZhiHu.TextView">
+        <item name="android:textSize">14sp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="Widget.WZhiHu.Button" parent="Widget.AppCompat.Button.Borderless.Colored"></style>
+
+    <style name="full_screen_dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation.Dialog</item>
+        <item name="android:windowSoftInputMode">stateUnspecified|adjustPan</item>
+    </style>
 </resources>

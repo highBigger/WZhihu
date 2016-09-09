@@ -19,9 +19,9 @@ import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import will.wzhihu.Injectors;
 import will.wzhihu.R;
-import will.wzhihu.activity.MainActivity;
+import will.wzhihu.WApplication;
+import will.wzhihu.main.MainActivity;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
 import will.wzhihu.common.animation.BaseAnimationListener;
@@ -51,7 +51,7 @@ public class SplashActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        Injectors.getInjector().inject(this);
+        WApplication.getInjector().inject(this);
         ButterKnife.bind(this);
 
         Observable<Splash> observable = splashClient.getSplash();

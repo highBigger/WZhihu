@@ -21,6 +21,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import will.wzhihu.R;
 import will.wzhihu.WApplication;
+import will.wzhihu.common.utils.ToastUtils;
 import will.wzhihu.main.MainActivity;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
@@ -90,6 +91,7 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 Log.e(TAG, "load splash error", e);
+                ToastUtils.toast(e.getMessage());
                 goToMain();
             }
         };

@@ -1,5 +1,6 @@
 package will.wzhihu.main;
 
+<<<<<<< HEAD
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -13,21 +14,31 @@ import will.wzhihu.R;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
 import will.wzhihu.detail.DtailActivity;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
-public class MainActivity extends BaseActivity {
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import will.wzhihu.R;
+import will.wzhihu.binder.ToolbarNavigationClickBinder;
+import will.wzhihu.common.activity.BindingActivity;
+import will.wzhihu.common.binder.CompositeBinder;
+import will.wzhihu.common.widget.WToolbar;
 
-    @Bind(R.id.button1)
-    Button button1;
+public class MainActivity extends BindingActivity {
+    @Bind(R.id.toolbar)
+    WToolbar toolbar;
+
+    @Bind(R.id.list)
+    RecyclerView recyclerView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
+    protected int getContentLayoutId() {
+        return R.layout.activity_main;
     }
 
-    @OnClick(R.id.button1)
-    public void onCLick(){
-        new ActivityStarter(DtailActivity.class).start(this);
+    protected void prepareBinder(View view, CompositeBinder binder) {
+        ButterKnife.bind(this);
+        binder.add(new ToolbarNavigationClickBinder(toolbar, this));
     }
 }

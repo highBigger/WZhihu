@@ -1,24 +1,22 @@
 package will.wzhihu.common.utils;
 
-import android.content.res.Resources;
 import android.os.Handler;
 import android.view.Gravity;
 import android.widget.Toast;
 
 import will.wzhihu.WApplication;
-import will.wzhihu.common.log.Log;
 
 public class ToastUtils {
 
     public static final String TAG = "ToastUtils";
 
     public static void toast(int msgResId) {
-        try {
-            String msg = WApplication.getInstance().getString(msgResId);
-            toast(msg, Toast.LENGTH_SHORT);
-        } catch (Resources.NotFoundException e) {
-            Log.e(TAG, "toast error", e);
-        }
+        String msg = WApplication.getInstance().getString(msgResId);
+        toast(msg);
+    }
+
+    public static void toast(CharSequence msg) {
+        toast(msg, Toast.LENGTH_SHORT);
     }
 
     public static void toast(CharSequence s, int duration) {

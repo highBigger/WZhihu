@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="WZhiHu.Animation.Activity" parent="@android:style/Animation.Activity">
+    </style>
+
+    <style name="WZhiHu.Animation.Activity.Fade" parent="WZhiHu.Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="WZhiHu.Animation.Activity.Slide" parent="WZhiHu.Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_left_enter</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_left_leave</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_right_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_right_leave</item>
+        <item name="android:taskOpenEnterAnimation">@anim/slide_left_enter</item>
+        <item name="android:taskOpenExitAnimation">@anim/slide_left_leave</item>
+        <item name="android:taskCloseEnterAnimation">@anim/slide_right_enter</item>
+        <item name="android:taskCloseExitAnimation">@anim/slide_right_leave</item>
+    </style>
+
+    <style name="WZhiHu.Animation.Activity.Instant" parent="WZhiHu.Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/instant_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/instant_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/instant_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/instant_out</item>
+        <item name="android:taskOpenEnterAnimation">@anim/instant_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/instant_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/instant_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/instant_out</item>
+    </style>
+
+</resources>

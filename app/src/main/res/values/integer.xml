@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="animation_default_duration">300</integer>
+    <integer name="animation_slow_duration">1000</integer>
+
+    <!--config post view  -->
+    <integer name="post_view_weight_sum">6</integer>
+    <integer name="post_view_vote_weight">1</integer>
+    <integer name="post_view_post_weight">5</integer>
+</resources>

@@ -4,27 +4,29 @@ import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
-
 import javax.inject.Inject;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
-import rx.Observer;
+import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import will.wzhihu.Injectors;
 import will.wzhihu.R;
+import will.wzhihu.activity.MainActivity;
+import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
+import will.wzhihu.common.animation.BaseAnimationListener;
 import will.wzhihu.common.log.Log;
+import will.wzhihu.common.rxjava.BaseSubscriber;
 import will.wzhihu.splash.client.SplashClient;
 import will.wzhihu.splash.model.Splash;
 
@@ -37,10 +39,13 @@ public class SplashActivity extends BaseActivity {
     @Bind(R.id.image)
     SimpleDraweeView image;
 
+    @Bind(R.id.loading)
+    View loading;
+
     @Inject
     SplashClient splashClient;
 
-    private Observable<Splash> observable;
+    private Subscriber<Splash> subscriber;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,25 +54,22 @@ public class SplashActivity extends BaseActivity {
         Injectors.getInjector().inject(this);
         ButterKnife.bind(this);
 
-        observable = splashClient.getSplash(720, 1280);
-        Observer<Splash> observer = new Observer<Splash>() {
-            @Override
-            public void onCompleted() {
-                Log.d(TAG, "completed");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-                Log.d(TAG, "failed");
-            }
-
+        Observable<Splash> observable = splashClient.getSplash();
+        subscriber = new BaseSubscriber<Splash>() {
             @Override
             public void onNext(Splash splash) {
                 ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
 
                     @Override
                     public void onFinalImageSet(String id, ImageInfo imageInfo, Animatable animatable) {
+                        loading.setVisibility(View.GONE);
                         Animation animation = AnimationUtils.loadAnimation(SplashActivity.this.getApplicationContext(), R.anim.splash_fade_in);
+                        animation.setAnimationListener(new BaseAnimationListener() {
+                            @Override
+                            public void onAnimationEnd(Animation animation) {
+                                goToMain();
+                            }
+                        });
                         image.startAnimation(animation);
                     }
 
@@ -84,12 +86,27 @@ public class SplashActivity extends BaseActivity {
 
                 image.setController(controller);
             }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.e(TAG, "load splash error", e);
+                goToMain();
+            }
         };
-        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(observer);
+
+        observable.observeOn(AndroidSchedulers.mainThread()).subscribe(subscriber);
     }
 
     @Override
     protected void onDestroy() {
+        if (null != subscriber){
+            subscriber.unsubscribe();
+        }
         super.onDestroy();
+    }
+
+    private void goToMain() {
+        this.finish();
+        new ActivityStarter(MainActivity.class).start(this);
     }
 }

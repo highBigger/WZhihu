@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application theme. -->
+    <style name="WZhiHu.Theme" parent="Theme.AppCompat.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorPrimaryDark">@color/brand_dark</item>
+        <item name="colorAccent">@color/brand_accent</item>
+        <item name="android:colorBackground">@color/background_dark</item>
+        <item name="android:colorForeground">@color/foreground_dark</item>
+        <item name="android:textColorPrimary">@color/text_primary_light</item>
+        <item name="android:textColorPrimaryInverse">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+        <item name="android:textColorSecondaryInverse">@color/text_secondary_light</item>
+        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:windowAnimationStyle">@style/WZhiHu.Animation.Activity.Slide</item>
+
+        <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar.Wall</item>
+    </style>
+
+    <style name="WZhiHu.Theme.Reverse" parent="WZhiHu.Theme">
+        <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar.Wall.Reverse</item>
+        <item name="android:toolbarStyle">@style/Widget.AppCompat.Toolbar.Wall.Reverse</item>
+    </style>
+
+    <style name="WZhiHu.Theme.NoTitleBar" parent="WZhiHu.Theme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <declare-styleable name="Theme">
+        <attr name="entryViewStyle" format="reference" />
+        <attr name="switchViewStyle" format="reference" />
+    </declare-styleable>
+</resources>

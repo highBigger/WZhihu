@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Toolbar.NavigationButtonStyle" parent="@style/Widget.AppCompat.Toolbar.Button.Navigation">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:paddingRight">6dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:background">@drawable/bg_navigation</item>
+    </style>
+
+    <style name="Toolbar.ActionButtonStyle" parent="@style/Widget.AppCompat.ActionButton">
+        <item name="android:background">@drawable/btn_menu</item>
+    </style>
+
+    <style name="Toolbar.ActionMenuTextAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="Widget.AppCompat.Toolbar.Wall">
+        <item name="android:minHeight">@dimen/toolbar_height</item>
+        <item name="maxButtonHeight">@dimen/toolbar_height</item>
+        <item name="android:background">@drawable/bg_underline</item>
+        <item name="android:actionMenuTextAppearance">@style/Toolbar.ActionMenuTextAppearance</item>
+        <item name="actionMenuTextAppearance">@style/Toolbar.ActionMenuTextAppearance</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorPrimaryInverse">@color/white</item>
+        <item name="android:textColorSecondary">@color/background_dark</item>
+        <item name="android:actionMenuTextColor">@color/background_dark</item>
+        <item name="actionMenuTextColor">@color/background_dark</item>
+        <item name="popupTheme">@style/Theme.Toolbar.Popup</item>
+        <!--back button style-->
+        <item name="toolbarNavigationButtonStyle">@style/Toolbar.NavigationButtonStyle</item>
+        <item name="android:actionButtonStyle">@style/Toolbar.ActionButtonStyle</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Toolbar.Title</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Toolbar.SubTitle</item>
+        <item name="headerTitleTextAppearance">@style/TextAppearance.Toolbar.Title</item>
+        <item name="subHeaderTitleTextAppearance">@style/TextAppearance.Toolbar.SubTitle</item>
+        <item name="menuTextAppearance">@style/TextAppearance.Toolbar.Menu</item>
+        <item name="menuTextRightMargin">12dp</item>
+        <item name="navigationIcon">@drawable/ic_back_black</item>
+        <item name="titleMargins">0dp</item>
+        <item name="titleMarginTop">0dp</item>
+        <item name="titleMarginStart">6dp</item>
+        <item name="titleMarginEnd">0dp</item>
+        <item name="titleMarginBottom">0dp</item>
+        <item name="contentInsetStart">0dp</item>
+        <item name="contentInsetLeft">0dp</item>
+        <item name="actionBarSize">30dp</item>
+    </style>
+
+    <style name="Theme.Toolbar.Popup" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:textColorPrimaryInverse">@color/text_primary_dark</item>
+        <item name="android:textColorSecondary">@color/text_secondary_dark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="dropDownListViewStyle">@style/Toolbar.Popup.DropDownListViewStyle</item>
+        <item name="actionOverflowMenuStyle">@style/OverFlowMenu</item>
+    </style>
+
+    <style name="Toolbar.Popup.DropDownListViewStyle" parent="@style/Widget.AppCompat.ListView.DropDown">
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.Title" parent="@style/WZhiHu.TextAppearance.Widget.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.SubTitle" parent="@style/WZhiHu.TextAppearance.Widget.TextView">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/gray71</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.Menu" parent="@style/WZhiHu.TextAppearance.Widget.TextView">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/text_menu</item>
+    </style>
+
+   <!--black toolbar style-->
+    <style name="Widget.AppCompat.Toolbar.Wall.Reverse">
+        <item name="android:background">@color/background_dark</item>
+        <item name="navigationIcon">@drawable/ic_back_white</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Toolbar.Title.Reverse</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.Toolbar.SubTitle.Reverse</item>
+        <item name="headerTitleTextAppearance">@style/TextAppearance.Toolbar.Title.Reverse</item>
+        <item name="subHeaderTitleTextAppearance">@style/TextAppearance.Toolbar.SubTitle.Reverse</item>
+        <item name="menuTextAppearance">@style/TextAppearance.Toolbar.Menu.Reverse</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.Title.Reverse">
+        <item name="android:textColor">@color/text_primary_light</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.SubTitle.Reverse">
+        <item name="android:textColor">@color/text_primary_light</item>
+    </style>
+
+    <style name="TextAppearance.Toolbar.Menu.Reverse">
+        <item name="android:textColor">@color/gray71</item>
+    </style>
+
+    <style name="OverFlowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <!-- Required for pre-Lollipop. -->
+        <item name="overlapAnchor">false</item>
+
+        <!-- Required for Lollipop. -->
+        <item name="android:overlapAnchor">false</item>
+        <item name="android:dropDownHorizontalOffset">12dp</item>
+    </style>
+</resources>

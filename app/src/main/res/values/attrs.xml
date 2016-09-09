@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="WToolbar">
+        <attr name="headerTitle" format="string"/>
+
+        <attr name="headerTitleTextAppearance" format="reference"/>
+
+        <attr name="headerTitleTextColor" format="reference"/>
+
+        <attr name="subHeaderTitle" format="string"/>
+
+        <attr name="subHeaderTitleTextAppearance" format="reference"/>
+
+        <attr name="subHeaderTitleTextColor" format="reference"/>
+
+        <attr name="menuText" format="string"/>
+
+        <attr name="menuTextColor" format="reference"/>
+
+        <attr name="menuTextAppearance" format="reference"/>
+
+        <attr name="menuTextRightMargin" format="dimension" />
+
+        <attr name="menuEnable" format="boolean" />
+
+    </declare-styleable>
+</resources>

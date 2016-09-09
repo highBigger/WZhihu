@@ -1,8 +1,86 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <!-- grayscale -->
+    <color name="transparent">#00000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="gray97">#F8F8F8</color>
+    <color name="gray93">#ECECEC</color>
+    <color name="gray90">#E5E5E5</color>
+    <color name="gray85">#D8D8D8</color>
+    <color name="gray71">#B6B6B6</color>
+    <color name="gray59">#979797</color>
+    <color name="gray29">#4A4A4A</color>
+    <color name="gray32">#545454</color>
+    <color name="gray25">#414141</color>
+    <color name="gray20">#343434</color>
+    <color name="gray25_a_60">#99414141</color>
+    <color name="black">#000000</color>
 
-    <color name="colorBlack">#000000</color>
+
+    <!-- basic colors -->
+    <color name="blue_dark">#187efb</color>
+    <color name="blue_light">#00abec</color>
+    <color name="blue_bright">#A5CEE1</color>
+    <color name="purple_dark">#6e32ff</color>
+    <color name="purple">#9933cc</color>
+    <color name="purple_light">#c182e0</color>
+    <color name="purple_bright">#d6adeb</color>
+    <color name="green_dark">#669900</color>
+    <color name="green_light">#92c500</color>
+    <color name="green_bright">#c5e26d</color>
+    <color name="yellow">#FFDD1B</color>
+    <color name="yellow_bright">#FFE550</color>
+    <color name="yellow_dark">#B09F09</color>
+    <color name="yellow_lighter">#F0A940</color>
+    <color name="red_dark">#DC0F15</color>
+    <color name="red_light">#f66862</color>
+    <color name="red_bright">#ff9494</color>
+
+    <!-- brand colors -->
+    <color name="brand_primary">@color/gray25</color>
+    <color name="brand_dark">@color/black</color>
+    <color name="brand_light">@color/gray29</color>
+    <color name="brand_accent">@color/yellow</color>
+    <color name="brand_highlight">@color/red_light</color>
+
+    <!-- colors -->
+    <color name="background_black">@color/black</color>
+    <color name="background_dark">@color/gray25</color>
+    <color name="background_dark_a_60">@color/gray25_a_60</color>
+    <color name="background_light">@color/gray85</color>
+    <color name="background_lighter">@color/gray93</color>
+    <color name="background_bright">@color/gray97</color>
+    <color name="background_white">@color/white</color>
+    <color name="background_press">@color/gray20</color>
+    <color name="background_black_ripple">@color/gray32</color>
+
+    <color name="foreground_dark">@color/gray85</color>
+    <color name="foreground_light">@color/gray59</color>
+
+    <!-- text colors -->
+    <color name="text_primary_dark">@color/black</color>
+    <color name="text_secondary_dark">@color/gray71</color>
+    <color name="text_tertiary_dark">@color/gray25</color>
+    <color name="text_disable_dark">@color/gray85</color>
+
+    <color name="text_primary_light">@color/white</color>
+    <color name="text_secondary_light">@color/gray85</color>
+    <color name="text_tertiary_light">@color/gray59</color>
+    <color name="text_disable_light">@color/gray59</color>
+
+    <color name="text_white">@color/white</color>
+
+    <color name="text_hightlight">@color/brand_highlight</color>
+    <color name="text_link">@color/brand_accent</color>
+    <color name="text_comment">@color/yellow_lighter</color>
+    <color name="primary_dark_material_dark_1">#821515</color>
+
+    <color name="divider_gray">@color/gray85</color>
+
+    <color name="background_post_0">@color/gray97</color>
+    <color name="background_post_1">#FFF9BE</color>
+    <color name="background_post_2">#FFE3AF</color>
+    <color name="background_post_3">#FFDCE1</color>
+    <color name="background_post_4">#E6DCFF</color>
+    <color name="background_post_5">#E1FFF8</color>
+    <color name="picker_circle">#25000000</color>
 </resources>

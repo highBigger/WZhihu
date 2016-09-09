@@ -1,7 +1,7 @@
 package will.wzhihu.common.okhttp;
 
 import android.content.Context;
-import android.util.Log;
+
 import com.squareup.okhttp.Cache;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
@@ -11,7 +11,9 @@ import com.squareup.okhttp.ResponseBody;
 import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
 import will.wzhihu.WApplication;
+import will.wzhihu.common.log.Log;
 
 /**
  * @author wendeping
@@ -30,7 +32,7 @@ public class OkHttpClients {
     public static OkHttpClient buildClient() {
         OkHttpClient client = new OkHttpClient();
         client.setConnectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS);
-        client.interceptors().add(new CookieInterceptor());
+//        client.interceptors().add(new CookieInterceptor());
         client.interceptors().add(new LoggingInterceptor());
         client.setCache(cache);
         client.setRetryOnConnectionFailure(false);

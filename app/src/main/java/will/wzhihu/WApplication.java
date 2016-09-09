@@ -1,9 +1,7 @@
 package will.wzhihu;
 
 import android.app.Application;
-
 import com.facebook.drawee.backends.pipeline.Fresco;
-
 import will.wzhihu.module.ClientModule;
 import will.wzhihu.module.DaggerWComponent;
 import will.wzhihu.module.WComponent;
@@ -23,9 +21,20 @@ public class WApplication extends Application {
     public void onCreate() {
         super.onCreate();
         context = this;
+        wComponent = DaggerWComponent.builder().clientModule(new ClientModule()).build();
+
         //init fresco image lib
         initFresco();
-        wComponent = DaggerWComponent.builder().clientModule(new ClientModule()).build();
+        initToast();
+    }
+
+    private void initToast() {
+        try {
+            // to ensure the Toast will be initialized on the main thread
+            Class.forName("android.widget.Toast");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initFresco() {

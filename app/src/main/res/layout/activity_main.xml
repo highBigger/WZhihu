@@ -7,8 +7,10 @@
     android:orientation="vertical">
 
     <will.wzhihu.common.widget.WToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/green_light"
         app:title="@string/main_page"/>
 
     <android.support.v4.widget.SwipeRefreshLayout

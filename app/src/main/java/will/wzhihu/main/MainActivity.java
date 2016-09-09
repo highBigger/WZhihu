@@ -1,4 +1,4 @@
-package will.wzhihu.activity;
+package will.wzhihu.main;
 
 import android.os.Bundle;
 import android.widget.Button;

@@ -1,16 +1,21 @@
 package will.wzhihu;
 
 import android.app.Application;
-import android.content.Context;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
+
+import will.wzhihu.module.ClientModule;
+import will.wzhihu.module.DaggerWComponent;
+import will.wzhihu.module.WComponent;
+
 /**
  * @author wendeping
  */
 public class WApplication extends Application {
-    private static Application context;
+    private static WApplication context;
+    private WComponent wComponent;
 
-    public static Context getInstance() {
+    public static WApplication getInstance() {
         return context;
     }
 
@@ -20,10 +25,14 @@ public class WApplication extends Application {
         context = this;
         //init fresco image lib
         initFresco();
-        Injectors.init(this);
+        wComponent = DaggerWComponent.builder().clientModule(new ClientModule()).build();
     }
 
     private void initFresco() {
         Fresco.initialize(this);
+    }
+
+    public static WComponent getInjector() {
+        return context.wComponent;
     }
 }

@@ -1,4 +1,4 @@
-package will.wzhihu;
+package will.wzhihu.module;
 
 import javax.inject.Singleton;
 

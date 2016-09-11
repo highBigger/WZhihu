@@ -3,6 +3,8 @@ package will.wzhihu.common.presenter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import will.wzhihu.common.log.Log;
 import will.wzhihu.common.utils.CollectionUtils;
 
 public class EditableListPresenter<T> extends LoadingPresenter {
@@ -26,6 +28,10 @@ public class EditableListPresenter<T> extends LoadingPresenter {
 
     public void setItems(List<T> items) {
         mItems = new ArrayList<>(items);
+        for (ListChangeListener listener : mListChangeListeners) {
+            Log.d(TAG, "set items fire listener" + listener);
+            listener.onItemsChanged();
+        }
         this.fireItemsChanged();
     }
 
@@ -215,6 +221,7 @@ public class EditableListPresenter<T> extends LoadingPresenter {
     }
 
     public interface ListChangeListener {
+        void onItemsChanged();
 
         void onItemChanged(int position);
 
@@ -232,6 +239,11 @@ public class EditableListPresenter<T> extends LoadingPresenter {
     }
 
     public static class ListChangeListenerAdapter implements ListChangeListener{
+
+        @Override
+        public void onItemsChanged() {
+
+        }
 
         @Override
         public void onItemChanged(int position) {

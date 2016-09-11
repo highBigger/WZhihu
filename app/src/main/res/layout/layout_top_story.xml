@@ -19,7 +19,7 @@
         CircleIndicator:ci_selected_background="@color/indicator_select_circle"
         CircleIndicator:ci_mode="outside"
         CircleIndicator:ci_gravity="center"
-        CircleIndicator:ci_radius="5dp"
+        CircleIndicator:ci_radius="3dp"
         CircleIndicator:ci_margin="5dp"
         />
 </FrameLayout>

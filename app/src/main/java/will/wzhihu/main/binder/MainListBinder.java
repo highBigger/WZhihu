@@ -3,8 +3,10 @@ package will.wzhihu.main.binder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import will.wzhihu.common.adapter.RecyclerListAdapter;
+import will.wzhihu.common.binder.Binder;
 import will.wzhihu.common.binder.CompositeBinder;
+import will.wzhihu.common.recycler.LoadMoreListener;
+import will.wzhihu.common.recycler.RecyclerListAdapter;
 import will.wzhihu.main.MainActivity;
 import will.wzhihu.main.mapper.StoryDateMapper;
 import will.wzhihu.main.mapper.StoryMapper;
@@ -14,19 +16,32 @@ import will.wzhihu.main.presenter.MainPresenter;
 /**
  * @author wendeping
  */
-public class MainBinder extends CompositeBinder{
+public class MainListBinder extends CompositeBinder {
     private MainPresenter mainPresenter;
-    private RecyclerView recyclerView;
-    private MainActivity mainActivity;
+    private LoadMoreListener loadMoreListener;
 
-    public MainBinder(MainActivity mainActivity, MainPresenter mainPresenter, RecyclerView recyclerView) {
-        this.mainActivity = mainActivity;
+    public MainListBinder(MainActivity mainActivity, final MainPresenter mainPresenter, final RecyclerView recyclerView) {
         this.mainPresenter = mainPresenter;
-        this.recyclerView = recyclerView;
 
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mainActivity);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(newAdapter());
+        add(new Binder() {
+            @Override
+            public void bind() {
+                if (null == loadMoreListener) {
+                    loadMoreListener = new LoadMoreListener(mainPresenter, 1);
+                    recyclerView.addOnScrollListener(loadMoreListener);
+                }
+            }
+
+            @Override
+            public void unbind() {
+                if (null != loadMoreListener) {
+                    recyclerView.removeOnScrollListener(loadMoreListener);
+                }
+            }
+        });
     }
 
     private RecyclerListAdapter newAdapter() {

@@ -3,7 +3,7 @@ package will.wzhihu.common.presenter;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ListPresenter<T> extends TaskPresenter {
+public abstract class ListPresenter<T> extends LoadingPresenter {
     public static String ITEMS_FIELD = "items";
 
     private List<T> items = new ArrayList<T>();

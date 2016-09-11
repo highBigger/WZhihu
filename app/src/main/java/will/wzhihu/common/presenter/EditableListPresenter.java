@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import will.wzhihu.common.utils.CollectionUtils;
 
-public class EditableListPresenter<T> extends TaskPresenter{
+public class EditableListPresenter<T> extends LoadingPresenter {
 
     private static final String TAG = "EditableListPresenter";
 

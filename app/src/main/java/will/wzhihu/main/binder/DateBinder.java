@@ -5,6 +5,7 @@ import android.widget.TextView;
 import will.wzhihu.common.binder.PresenterBinder;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.presenter.PropertyChangeListener;
+import will.wzhihu.common.utils.DateUtils;
 import will.wzhihu.main.presenter.DatePresenter;
 
 /**
@@ -18,7 +19,7 @@ public class DateBinder extends PresenterBinder<DatePresenter> {
         add("date", new PropertyChangeListener() {
             @Override
             public void propertyChanged() {
-                textView.setText(presenter.getDate());
+                textView.setText(DateUtils.getShowTime(presenter.getDate()));
             }
         });
     }

@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
+import will.wzhihu.common.log.Log;
+
 /**
  * We use ConcurrentHashMap to avoid ConcurrentModificationException which is caused by modifying
  * the PropertyChangeListeners while iterating through the refresh ( yes, even in the same thread will
@@ -16,6 +18,7 @@ import java.util.concurrent.CopyOnWriteArraySet;
  * but may cause NoSuchElementException( but this is not our concern)
  */
 public class PropertyChangeSupport extends HashMap<String, CopyOnWriteArraySet<PropertyChangeListener>> {
+    private static final String TAG = "PropertyChangeSupport";
     private final Set<String> properties;
     private final String beanDescription;
 
@@ -44,8 +47,10 @@ public class PropertyChangeSupport extends HashMap<String, CopyOnWriteArraySet<P
     public void firePropertyChange(String name) {
         ensureMainThread("firePropertyChange must be invoked from main thread");
         validateProperty(name);
+        Log.d(TAG, "fire %s propertyChange", name);
         if (containsKey(name)) {
             for (PropertyChangeListener listener: get(name)) {
+                Log.d(TAG, "fire %s propertyChange listener %s", name, listener);
                 listener.propertyChanged();
             }
         }

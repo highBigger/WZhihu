@@ -13,6 +13,7 @@ import will.wzhihu.common.log.Log;
 import will.wzhihu.common.presenter.RecyclerPresenter;
 import will.wzhihu.common.rxjava.BaseSubscriber;
 import will.wzhihu.common.utils.CollectionUtils;
+import will.wzhihu.common.utils.DateUtils;
 import will.wzhihu.main.client.StoryClient;
 import will.wzhihu.main.model.Latest;
 import will.wzhihu.main.model.Stories;
@@ -28,6 +29,8 @@ public class MainPresenter extends RecyclerPresenter<Story> {
     StoryClient storyClient;
 
     private List<Story> topStories;
+
+    private String currentDate;
 
     public MainPresenter() {
         WApplication.getInjector().inject(this);
@@ -80,13 +83,14 @@ public class MainPresenter extends RecyclerPresenter<Story> {
         });
     }
 
-    public void loadBefore(String date) {
+    @Override
+    public void loadAfter() {
         if (getLoading()) {
             return;
         }
 
         setLoading(true);
-        storyClient.getBefore(date).flatMap(new Func1<Stories, Observable<List<Story>>>() {
+        storyClient.getBefore(DateUtils.subtractDay(currentDate)).flatMap(new Func1<Stories, Observable<List<Story>>>() {
             @Override
             public Observable<List<Story>> call(Stories stories) {
                 return Observable.just(convertStories(stories.date, stories.stories));
@@ -113,6 +117,7 @@ public class MainPresenter extends RecyclerPresenter<Story> {
         if (!CollectionUtils.isEmpty(latest.topStories)) {
             Story topStory = new Story();
             topStory.setItemType(Story.ITEM_TYPE_TOP_STORY);
+            topStory.date = latest.date;
             resultStories.add(topStory);
             setTopStories(latest.topStories);
         } else {
@@ -131,9 +136,13 @@ public class MainPresenter extends RecyclerPresenter<Story> {
         resultStories.add(dateStory);
 
         if (!CollectionUtils.isEmpty(stories)) {
-            resultStories.addAll(stories);
+            for (Story story : stories) {
+                story.date = date;
+                resultStories.add(story);
+            }
         }
 
+        currentDate = date;
         return resultStories;
     }
 

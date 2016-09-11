@@ -1,6 +1,5 @@
 package will.wzhihu.main;
 
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.widget.Button;
 
@@ -9,22 +8,23 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import will.wzhihu.Injectors;
 import will.wzhihu.R;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
 import will.wzhihu.detail.DtailActivity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import will.wzhihu.R;
-import will.wzhihu.binder.ToolbarNavigationClickBinder;
 import will.wzhihu.common.activity.BindingActivity;
 import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.widget.WToolbar;
-import will.wzhihu.main.binder.MainBinder;
+import will.wzhihu.main.binder.MainListBinder;
+import will.wzhihu.main.binder.MainToolbarBinder;
+import will.wzhihu.main.binder.RefreshBinder;
 import will.wzhihu.main.presenter.MainPresenter;
 
 public class MainActivity extends BindingActivity {
@@ -34,6 +34,9 @@ public class MainActivity extends BindingActivity {
     @Bind(R.id.list)
     RecyclerView recyclerView;
 
+    @Bind(R.id.refresh)
+    SwipeRefreshLayout refreshLayout;
+
     private MainPresenter mainPresenter;
     @Override
     protected int getContentLayoutId() {
@@ -42,9 +45,11 @@ public class MainActivity extends BindingActivity {
 
     protected void prepareBinder(View view, CompositeBinder binder) {
         ButterKnife.bind(this);
+        refreshLayout.setEnabled(false);
         mainPresenter = new MainPresenter();
-        binder.add(new ToolbarNavigationClickBinder(toolbar, this));
-        binder.add(new MainBinder(this, mainPresenter, recyclerView));
+        binder.add(new MainToolbarBinder(toolbar, this, recyclerView, mainPresenter));
+        binder.add(new MainListBinder(this, mainPresenter, recyclerView));
+        binder.add(new RefreshBinder(refreshLayout, mainPresenter));
         mainPresenter.loadLatest();
     }
 }

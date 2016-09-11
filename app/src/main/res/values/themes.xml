@@ -12,7 +12,7 @@
         <item name="android:textColorPrimaryInverse">@color/text_primary_dark</item>
         <item name="android:textColorSecondary">@color/text_secondary_dark</item>
         <item name="android:textColorSecondaryInverse">@color/text_secondary_light</item>
-        <item name="android:windowBackground">@color/background_dark</item>
+        <item name="android:windowBackground">@color/foreground_dark</item>
         <item name="android:windowAnimationStyle">@style/WZhiHu.Animation.Activity.Slide</item>
 
         <item name="toolbarStyle">@style/Widget.AppCompat.Toolbar.Wall</item>

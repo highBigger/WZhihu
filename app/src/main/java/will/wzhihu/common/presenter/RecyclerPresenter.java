@@ -18,4 +18,8 @@ public abstract class RecyclerPresenter<T extends FeedItem> extends EditableList
     public long getItemId(int position) {
         return this.get(position).getItemId().hashCode();
     }
+
+    public abstract void loadAfter();
+
+    public void loadBefore() {};
 }

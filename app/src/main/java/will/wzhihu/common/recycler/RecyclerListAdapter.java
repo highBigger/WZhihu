@@ -1,15 +1,14 @@
-package will.wzhihu.common.adapter;
+package will.wzhihu.common.recycler;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import will.wzhihu.R;
 import will.wzhihu.common.binder.Binder;
 import will.wzhihu.common.binder.BinderHelper;
+import will.wzhihu.common.log.Log;
 import will.wzhihu.common.mapper.RecyclerModelMapper;
 import will.wzhihu.common.model.FeedItem;
 import will.wzhihu.common.model.ItemPresentationModel;
@@ -44,6 +43,11 @@ public class RecyclerListAdapter<T extends FeedItem> extends RecyclerView.Adapte
 
     private EditableListPresenter.ListChangeListener mListChangeListener = new EditableListPresenter.ListChangeListener() {
 
+        @Override
+        public void onItemsChanged() {
+            Log.d(TAG, "items changed");
+            notifyDataSetChanged();
+        }
 
         @Override
         public void onItemChanged(int position) {
@@ -106,8 +110,8 @@ public class RecyclerListAdapter<T extends FeedItem> extends RecyclerView.Adapte
         mPresenter = presenter;
         if (mPresenter != null) {
             mPresenter.addListChangeListener(mListChangeListener);
+            Log.d(TAG, "setPresenter: add listener");
         }
-        this.notifyDataSetChanged();
     }
 
     @Override

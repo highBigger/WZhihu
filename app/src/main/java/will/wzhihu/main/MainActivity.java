@@ -24,6 +24,8 @@ import will.wzhihu.binder.ToolbarNavigationClickBinder;
 import will.wzhihu.common.activity.BindingActivity;
 import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.widget.WToolbar;
+import will.wzhihu.main.binder.MainBinder;
+import will.wzhihu.main.presenter.MainPresenter;
 
 public class MainActivity extends BindingActivity {
     @Bind(R.id.toolbar)
@@ -32,6 +34,7 @@ public class MainActivity extends BindingActivity {
     @Bind(R.id.list)
     RecyclerView recyclerView;
 
+    private MainPresenter mainPresenter;
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
@@ -39,6 +42,9 @@ public class MainActivity extends BindingActivity {
 
     protected void prepareBinder(View view, CompositeBinder binder) {
         ButterKnife.bind(this);
+        mainPresenter = new MainPresenter();
         binder.add(new ToolbarNavigationClickBinder(toolbar, this));
+        binder.add(new MainBinder(this, mainPresenter, recyclerView));
+        mainPresenter.loadLatest();
     }
 }

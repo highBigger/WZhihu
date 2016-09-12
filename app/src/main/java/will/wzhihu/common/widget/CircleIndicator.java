@@ -67,6 +67,7 @@ public class CircleIndicator extends View{
     private void init(Context context,AttributeSet attrs){
         tabItems = new ArrayList<>();
         handleTypedArray(context, attrs);
+        createMovingItem();
     }
 
     private void handleTypedArray(Context context, AttributeSet attrs) {
@@ -86,12 +87,11 @@ public class CircleIndicator extends View{
 
     public void setViewPager(final ViewPager viewPager){
         this.viewPager = viewPager;
+        setUpListener();
     }
 
     public void notifyDataSetChange() {
-        createTabItems();
-        createMovingItem();
-        setUpListener();
+        initTabItems();
     }
 
     private void setUpListener() {
@@ -127,7 +127,8 @@ public class CircleIndicator extends View{
         requestLayout();
         invalidate();
     }
-    private void createTabItems() {
+    private void initTabItems() {
+        tabItems.clear();
         for (int i = 0; i < viewPager.getAdapter().getCount(); i++) {
             OvalShape circle = new OvalShape();
             ShapeDrawable drawable = new ShapeDrawable(circle);
@@ -138,6 +139,8 @@ public class CircleIndicator extends View{
             shapeHolder.setPaint(paint);
             tabItems.add(shapeHolder);
         }
+        requestLayout();
+        invalidate();
     }
 
     private void createMovingItem() {

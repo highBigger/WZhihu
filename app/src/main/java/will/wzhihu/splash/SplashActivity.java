@@ -7,13 +7,17 @@ import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.TextView;
+
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
+
 import javax.inject.Inject;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import rx.Observable;
@@ -21,13 +25,13 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import will.wzhihu.R;
 import will.wzhihu.WApplication;
-import will.wzhihu.common.utils.ToastUtils;
-import will.wzhihu.main.MainActivity;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
 import will.wzhihu.common.animation.BaseAnimationListener;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.rxjava.BaseSubscriber;
+import will.wzhihu.common.utils.ToastUtils;
+import will.wzhihu.main.MainActivity;
 import will.wzhihu.splash.client.SplashClient;
 import will.wzhihu.splash.model.Splash;
 
@@ -42,6 +46,9 @@ public class SplashActivity extends BaseActivity {
 
     @Bind(R.id.loading)
     View loading;
+
+    @Bind(R.id.copy_right)
+    TextView copyRight;
 
     @Inject
     SplashClient splashClient;
@@ -59,6 +66,7 @@ public class SplashActivity extends BaseActivity {
         subscriber = new BaseSubscriber<Splash>() {
             @Override
             public void onNext(Splash splash) {
+                copyRight.setText(splash.text);
                 ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
 
                     @Override

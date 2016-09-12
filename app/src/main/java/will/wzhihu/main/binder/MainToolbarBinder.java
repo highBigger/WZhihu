@@ -3,6 +3,7 @@ package will.wzhihu.main.binder;
 import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import will.wzhihu.binder.ToolbarNavigationClickBinder;
 import will.wzhihu.common.binder.Binder;
@@ -25,12 +26,12 @@ public class MainToolbarBinder extends CompositeBinder {
             int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
             if (firstVisibleItemPosition != 0) {
                 Story story = mainPresenter.get(firstVisibleItemPosition);
-                toolbar.setTitle(DateUtils.getShowTime(story.date));
+                toolbar.setHeaderTitle(DateUtils.getShowTime(story.date));
             }
         }
     };
 
-    public MainToolbarBinder(WToolbar toolbar, Activity activity, final RecyclerView recyclerView, MainPresenter mainPresenter) {
+    public MainToolbarBinder(final WToolbar toolbar, Activity activity, final RecyclerView recyclerView, MainPresenter mainPresenter) {
         this.toolbar = toolbar;
         this.mainPresenter = mainPresenter;
         add(new ToolbarNavigationClickBinder(toolbar, activity));
@@ -43,6 +44,23 @@ public class MainToolbarBinder extends CompositeBinder {
             @Override
             public void unbind() {
                 recyclerView.removeOnScrollListener(scrollListener);
+            }
+        });
+
+        add(new Binder() {
+            @Override
+            public void bind() {
+                toolbar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                       recyclerView.smoothScrollToPosition(0);
+                    }
+                });
+            }
+
+            @Override
+            public void unbind() {
+                toolbar.setOnClickListener(null);
             }
         });
 

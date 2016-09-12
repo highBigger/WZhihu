@@ -11,9 +11,8 @@ import rx.functions.Func1;
 import will.wzhihu.WApplication;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.presenter.RecyclerPresenter;
-import will.wzhihu.common.rxjava.BaseSubscriber;
+import will.wzhihu.common.rxjava.LoadingPresenterSubscriber;
 import will.wzhihu.common.utils.CollectionUtils;
-import will.wzhihu.common.utils.DateUtils;
 import will.wzhihu.main.client.StoryClient;
 import will.wzhihu.main.model.Latest;
 import will.wzhihu.main.model.Stories;
@@ -31,6 +30,8 @@ public class MainPresenter extends RecyclerPresenter<Story> {
     private List<Story> topStories;
 
     private String currentDate;
+
+    private boolean enableRefresh = false;
 
     public MainPresenter() {
         WApplication.getInjector().inject(this);
@@ -50,6 +51,21 @@ public class MainPresenter extends RecyclerPresenter<Story> {
         firePropertyChange("topStories");
     }
 
+    public boolean getEnableRefresh() {
+        return enableRefresh;
+    }
+
+    private void setEnableRefresh(boolean enable) {
+        if (enableRefresh != enable) {
+            enableRefresh = enable;
+            firePropertyChange("enableRefresh");
+        }
+    }
+
+    public void refresh() {
+        loadLatest();
+    }
+
     public void loadLatest() {
         if (getLoading()) {
             return;
@@ -62,23 +78,19 @@ public class MainPresenter extends RecyclerPresenter<Story> {
                 Log.d(TAG, latest.toString());
                 return Observable.just(ConvertLatest(latest));
             }
-        }).subscribe(new BaseSubscriber<List<Story>>() {
+        }).subscribe(new LoadingPresenterSubscriber<List<Story>>(this) {
             @Override
             public void onNext(List<Story> stories) {
                 setItems(stories);
+                setEnableRefresh(false);
                 Log.d(TAG, "latest story size %d ", stories.size());
             }
 
             @Override
-            public void onCompleted() {
-                setLoading(false);
-                Log.d(TAG, "onCompleted");
-            }
-
-            @Override
             public void onError(Throwable e) {
-                setLoading(false);
+                super.onError(e);
                 Log.d(TAG, "error", e);
+                setEnableRefresh(true);
             }
         });
     }
@@ -90,20 +102,17 @@ public class MainPresenter extends RecyclerPresenter<Story> {
         }
 
         setLoading(true);
-        storyClient.getBefore(DateUtils.subtractDay(currentDate)).flatMap(new Func1<Stories, Observable<List<Story>>>() {
+        storyClient.getBefore(currentDate).observeOn(AndroidSchedulers.mainThread()).flatMap(new Func1<Stories, Observable<List<Story>>>() {
             @Override
             public Observable<List<Story>> call(Stories stories) {
+                Log.d(TAG, "get before %s story", stories.date);
                 return Observable.just(convertStories(stories.date, stories.stories));
             }
-        }).observeOn(AndroidSchedulers.mainThread()).subscribe(new BaseSubscriber<List<Story>>() {
+        }).subscribe(new LoadingPresenterSubscriber<List<Story>>(this) {
+
             @Override
             public void onNext(List<Story> stories) {
                 addAll(stories);
-            }
-
-            @Override
-            public void onCompleted() {
-                setLoading(false);
             }
         });
     }

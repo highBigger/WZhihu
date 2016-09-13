@@ -85,4 +85,7 @@
     <color name="picker_circle">#25000000</color>
     <color name="indicator_select_circle">#e6454a</color>
     <color name="indicator_default_circle">@color/white</color>
+    <color name="black_50">#80000000</color>
+    <color name="white_80">#ccffffff</color>
+    <color name="white_20">#33ffffff</color>
 </resources>

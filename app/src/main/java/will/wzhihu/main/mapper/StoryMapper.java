@@ -10,7 +10,7 @@ import will.wzhihu.common.binder.Binder;
 import will.wzhihu.common.mapper.RecyclerModelMapper;
 import will.wzhihu.common.model.ItemPresentationModel;
 import will.wzhihu.common.presenter.EditableListPresenter;
-import will.wzhihu.main.binder.StoryBinder;
+import will.wzhihu.main.binder.MultiPicStoryBinder;
 import will.wzhihu.main.model.Story;
 import will.wzhihu.main.presenter.StoryPresenter;
 
@@ -31,6 +31,6 @@ public class StoryMapper extends RecyclerModelMapper<Story> {
 
     @Override
     public Binder createBinder(int type, View view, @Nullable EditableListPresenter<Story> feedListPresenter, ItemPresentationModel<Story> presenter) {
-        return new StoryBinder(view, (StoryPresenter) presenter);
+        return new MultiPicStoryBinder(view, (StoryPresenter) presenter);
     }
 }

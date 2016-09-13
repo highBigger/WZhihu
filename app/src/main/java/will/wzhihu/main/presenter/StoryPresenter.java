@@ -1,10 +1,7 @@
 package will.wzhihu.main.presenter;
 
-import java.util.List;
-
 import will.wzhihu.common.model.ItemPresentationModel;
 import will.wzhihu.common.presenter.BasePresenter;
-import will.wzhihu.common.utils.CollectionUtils;
 import will.wzhihu.main.model.Story;
 
 /**
@@ -27,12 +24,14 @@ public class StoryPresenter extends BasePresenter implements ItemPresentationMod
         if (story == null) {
             return null;
         }
+        return story.getImage();
+    }
 
-        List<String> images = story.images;
-        if (CollectionUtils.isEmpty(images)) {
-            return null;
-        }
+    public Story getStory() {
+        return story;
+    }
 
-        return images.get(0);
+    public boolean getMultiPic() {
+        return story.multiPic;
     }
 }

@@ -1,19 +1,17 @@
 package will.wzhihu.main.adapter;
 
-import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
-import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.List;
 
 import will.wzhihu.R;
 import will.wzhihu.common.log.Log;
+import will.wzhihu.main.binder.StoryBinder;
 import will.wzhihu.main.model.Story;
+import will.wzhihu.main.presenter.StoryPresenter;
 
 /**
  * @author wendeping
@@ -40,14 +38,14 @@ public class TopStoryAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        Story story = stories.get(position);
         View view = LayoutInflater.from(container.getContext()).inflate(R.layout.item_pager_top_story, container, false);
-        Log.d(TAG, "%d story %s", position, story.toString());
-        SimpleDraweeView image = (SimpleDraweeView) view.findViewById(R.id.image);
-        TextView title = (TextView) view.findViewById(R.id.title);
-        title.setText(story.title);
-        Log.d(TAG, "instantiateItem simpleDraweeView");
-        image.setImageURI(Uri.parse(story.getImage()));
+
+        Story story = stories.get(position);
+        StoryPresenter presenter = new StoryPresenter();
+        StoryBinder binder = new StoryBinder(view, presenter);
+        binder.bind();
+        presenter.updateData(position, story);
+
         container.addView(view, 0);
         return view;
     }

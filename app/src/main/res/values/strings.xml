@@ -4,5 +4,6 @@
     <string name="loading_failed">加载失败，请重试</string>
     <string name="date_format">%1$s月%2$s日 %3$s</string>
     <string name="today_news">今日热闻</string>
+    <string name="multi_pic">多图</string>
 
 </resources>

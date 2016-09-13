@@ -1,16 +1,16 @@
 package will.wzhihu.main.binder;
 
+import android.app.Activity;
 import android.net.Uri;
 import android.view.View;
 import android.widget.TextView;
-
 import com.facebook.drawee.view.SimpleDraweeView;
-
 import butterknife.Bind;
 import will.wzhihu.R;
 import will.wzhihu.common.binder.Binder;
 import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.presenter.PropertyChangeListener;
+import will.wzhihu.detail.DetailActivity;
 import will.wzhihu.main.model.Story;
 import will.wzhihu.main.presenter.StoryPresenter;
 
@@ -60,6 +60,7 @@ public class StoryBinder extends CompositeBinder {
                     @Override
                     public void onClick(View v) {
                         Story story = presenter.getStory();
+                        DetailActivity.start(story, (Activity) view.getContext());
                     }
                 });
             }

@@ -24,16 +24,24 @@ public class ToastUtils {
         toast(s, duration, false);
     }
 
-    public static void toast(final CharSequence s, final int duration, final boolean cancelable) {
+    private static Toast makeToast(CharSequence s, int duration) {
         final Toast toast = Toast.makeText(WApplication.getInstance(), s, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
+        return toast;
+    }
+
+    public static void toast(final CharSequence s, final int duration, final boolean cancelable) {
+        final Toast[] toast = new Toast[1];
         if (Looper.myLooper() != Looper.getMainLooper()) {
             new Handler(Looper.getMainLooper()).post(new Runnable() {
                 @Override
                 public void run() {
-                    toast.show();
+                    toast[0] = makeToast(s, duration);
                 }
             });
+        } else {
+            toast[0] = makeToast(s, duration);
         }
 
         if (cancelable) {
@@ -41,7 +49,7 @@ public class ToastUtils {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    toast.cancel();
+                    toast[0].cancel();
                 }
             }, duration);
         }

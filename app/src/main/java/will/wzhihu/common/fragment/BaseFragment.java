@@ -14,12 +14,14 @@ import butterknife.ButterKnife;
 public abstract class BaseFragment extends Fragment {
 
     protected Activity mContent;
+    protected Bundle mBundle;
     protected View mRootView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContent = getActivity();
+        mBundle = getArguments();
         ButterKnife.bind(mContent);
     }
 

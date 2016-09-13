@@ -16,6 +16,22 @@
         />
 
     <TextView
+        android:id="@+id/multi_pic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white_20"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:padding="2dp"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@drawable/ic_multi_pic"
+        android:text="@string/multi_pic"
+        android:textSize="@dimen/font_tiny"
+        android:textColor="@color/black_50"
+        />
+
+    <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

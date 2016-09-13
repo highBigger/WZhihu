@@ -35,4 +35,12 @@ public class StoryPresenter extends BasePresenter implements ItemPresentationMod
 
         return images.get(0);
     }
+
+    public Story getStory() {
+        return story;
+    }
+
+    public boolean getMultiPic() {
+        return story.multiPic;
+    }
 }

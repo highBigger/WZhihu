@@ -3,7 +3,6 @@ package will.wzhihu.main;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import will.wzhihu.R;

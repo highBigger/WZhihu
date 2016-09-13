@@ -8,38 +8,65 @@ import com.facebook.drawee.view.SimpleDraweeView;
 
 import butterknife.Bind;
 import will.wzhihu.R;
-import will.wzhihu.common.binder.PresenterBinder;
+import will.wzhihu.common.binder.Binder;
+import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.presenter.PropertyChangeListener;
+import will.wzhihu.main.model.Story;
 import will.wzhihu.main.presenter.StoryPresenter;
 
 /**
  * @author wendeping
  */
-public class StoryBinder extends PresenterBinder<StoryPresenter> {
+public class StoryBinder extends CompositeBinder {
     @Bind(R.id.image)
     SimpleDraweeView image;
 
     @Bind(R.id.title)
     TextView title;
 
-    public StoryBinder(View view, StoryPresenter presenter) {
-        super(presenter);
-//        ButterKnife.bind(view);
+    TextView multiPic;
+
+    public StoryBinder(final View view, final StoryPresenter presenter) {
         image = (SimpleDraweeView) view.findViewById(R.id.image);
         title = (TextView) view.findViewById(R.id.title);
-        add("image", new PropertyChangeListener() {
+        multiPic = (TextView) view.findViewById(R.id.multi_pic);
+        presenter.addPropertyChangeListener("image", new PropertyChangeListener() {
             @Override
             public void propertyChanged() {
-                if (null != getPresenter().getImage()) {
-                    image.setImageURI(Uri.parse(getPresenter().getImage()));
+                if (null != presenter.getImage()) {
+                    image.setImageURI(Uri.parse(presenter.getImage()));
                 }
             }
         });
 
-        add("title", new PropertyChangeListener() {
+        presenter.addPropertyChangeListener("title", new PropertyChangeListener() {
             @Override
             public void propertyChanged() {
-                title.setText(getPresenter().getTitle());
+                title.setText(presenter.getTitle());
+            }
+        });
+
+        presenter.addPropertyChangeListener("multiPic", new PropertyChangeListener() {
+            @Override
+            public void propertyChanged() {
+                multiPic.setVisibility(presenter.getMultiPic() ? View.VISIBLE : View.INVISIBLE);
+            }
+        });
+
+        add(new Binder() {
+            @Override
+            public void bind() {
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Story story = presenter.getStory();
+                    }
+                });
+            }
+
+            @Override
+            public void unbind() {
+                view.setOnClickListener(null);
             }
         });
     }

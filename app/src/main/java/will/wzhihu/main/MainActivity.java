@@ -1,17 +1,5 @@
 package will.wzhihu.main;
 
-import android.os.Bundle;
-import android.widget.Button;
-
-import com.facebook.drawee.view.SimpleDraweeView;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import will.wzhihu.R;
-import will.wzhihu.common.activity.ActivityStarter;
-import will.wzhihu.common.activity.BaseActivity;
-import will.wzhihu.detail.DtailActivity;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

@@ -28,6 +28,7 @@
         android:drawableLeft="@drawable/ic_multi_pic"
         android:text="@string/multi_pic"
         android:textSize="@dimen/font_tiny"
+        android:visibility="gone"
         android:textColor="@color/black_50"
         />
 

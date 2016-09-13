@@ -1,19 +1,29 @@
 package will.wzhihu.common.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import butterknife.Bind;
+import will.wzhihu.R;
+import will.wzhihu.common.widget.WToolbar;
 
 /**
  * Created by taoming on 2016/9/9.
  */
 public class DetailFragment extends BaseFragment {
-    @Nullable
+
+    @Bind(R.id.detail_toolbar)
+    WToolbar toolbar;
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+    protected int getLayoutId() {
+        return R.layout.fragment_detail;
+    }
+
+    @Override
+    protected void initView() {
+        toolbar.setHeaderTitle("detailpage");
+    }
+
+    @Override
+    protected void initData() {
 
     }
 }

@@ -30,7 +30,6 @@ import will.wzhihu.common.activity.BaseActivity;
 import will.wzhihu.common.animation.BaseAnimationListener;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.rxjava.BaseSubscriber;
-import will.wzhihu.common.utils.ToastUtils;
 import will.wzhihu.main.MainActivity;
 import will.wzhihu.splash.client.SplashClient;
 import will.wzhihu.splash.model.Splash;
@@ -99,7 +98,6 @@ public class SplashActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 Log.e(TAG, "load splash error", e);
-                ToastUtils.toast(e.getMessage());
                 goToMain();
             }
         };

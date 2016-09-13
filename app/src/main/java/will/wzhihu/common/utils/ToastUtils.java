@@ -1,6 +1,7 @@
 package will.wzhihu.common.utils;
 
 import android.os.Handler;
+import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -23,10 +24,17 @@ public class ToastUtils {
         toast(s, duration, false);
     }
 
-    public static void toast(CharSequence s, int duration, boolean cancelable) {
+    public static void toast(final CharSequence s, final int duration, final boolean cancelable) {
         final Toast toast = Toast.makeText(WApplication.getInstance(), s, duration);
         toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            new Handler(Looper.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    toast.show();
+                }
+            });
+        }
 
         if (cancelable) {
             Handler handler = new Handler();

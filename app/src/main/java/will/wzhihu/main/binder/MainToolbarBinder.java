@@ -1,6 +1,5 @@
 package will.wzhihu.main.binder;
 
-import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -30,7 +29,7 @@ public class MainToolbarBinder extends CompositeBinder {
         }
     };
 
-    public MainToolbarBinder(final WToolbar toolbar, Activity activity, final RecyclerView recyclerView, MainPresenter mainPresenter) {
+    public MainToolbarBinder(final WToolbar toolbar, final RecyclerView recyclerView, MainPresenter mainPresenter) {
         this.toolbar = toolbar;
         this.mainPresenter = mainPresenter;
         add(new Binder() {

@@ -35,7 +35,7 @@ public class MainActivity extends BindingActivity {
     protected void prepareBinder(View view, CompositeBinder binder) {
         refreshLayout.setEnabled(false);
         mainPresenter = new MainPresenter();
-        binder.add(new MainToolbarBinder(toolbar, this, recyclerView, mainPresenter));
+        binder.add(new MainToolbarBinder(toolbar, recyclerView, mainPresenter));
         binder.add(new MainListBinder(this, mainPresenter, recyclerView));
         binder.add(new RefreshBinder(refreshLayout, mainPresenter));
     }

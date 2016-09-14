@@ -3,8 +3,8 @@ package will.wzhihu.main;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import will.wzhihu.R;
 import will.wzhihu.common.activity.BindingActivity;
 import will.wzhihu.common.binder.CompositeBinder;
@@ -25,6 +25,7 @@ public class MainActivity extends BindingActivity {
     SwipeRefreshLayout refreshLayout;
 
     private MainPresenter mainPresenter;
+
     @Override
     protected int getContentLayoutId() {
         return R.layout.activity_main;
@@ -32,7 +33,6 @@ public class MainActivity extends BindingActivity {
 
     @Override
     protected void prepareBinder(View view, CompositeBinder binder) {
-        ButterKnife.bind(this);
         refreshLayout.setEnabled(false);
         mainPresenter = new MainPresenter();
         binder.add(new MainToolbarBinder(toolbar, this, recyclerView, mainPresenter));

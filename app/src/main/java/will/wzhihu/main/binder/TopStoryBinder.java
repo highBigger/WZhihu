@@ -3,6 +3,8 @@ package will.wzhihu.main.binder;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import will.wzhihu.R;
 import will.wzhihu.common.binder.PresenterBinder;
 import will.wzhihu.common.log.Log;
@@ -16,12 +18,17 @@ import will.wzhihu.main.presenter.MainPresenter;
  */
 public class TopStoryBinder extends PresenterBinder<MainPresenter> {
     public static final String TAG = "TopStoryBinder";
+    @Bind(R.id.pager)
+    ViewPager viewPager;
+
+    @Bind(R.id.indicator)
+    CircleIndicator circleIndicator;
 
     private TopStoryAdapter topStoryAdapter;
+
     public TopStoryBinder(final View view, final MainPresenter mainPresenter) {
         super(mainPresenter);
-        final ViewPager viewPager = (ViewPager) view.findViewById(R.id.pager);
-        final CircleIndicator circleIndicator = (CircleIndicator) view.findViewById(R.id.indicator);
+        ButterKnife.bind(this, view);
         circleIndicator.setViewPager(viewPager);
         initializeAndAdd("topStories", new PropertyChangeListener() {
             @Override

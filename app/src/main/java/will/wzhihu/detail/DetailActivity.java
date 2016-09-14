@@ -2,8 +2,7 @@ package will.wzhihu.detail;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-
+import android.view.View;
 import will.wzhihu.R;
 import will.wzhihu.common.activity.ActivityStarter;
 import will.wzhihu.common.activity.BaseActivity;
@@ -22,9 +21,16 @@ public class DetailActivity extends BaseActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_content, new DetailFragment()).commit();
+    protected int getContentLayoutId() {
+        return R.layout.activity_detail;
+    }
+
+    @Override
+    protected void initView(View contentView) {
+        DetailFragment detailFragment = new DetailFragment();
+        detailFragment.setArguments(getIntent().getExtras());
+        getSupportFragmentManager().beginTransaction()
+            .add(R.id.fragment_content, detailFragment)
+            .commit();
     }
 }

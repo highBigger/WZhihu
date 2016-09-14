@@ -12,7 +12,6 @@ import butterknife.ButterKnife;
 
 
 public abstract class BaseFragment extends Fragment {
-
     protected Activity mContent;
     protected Bundle mBundle;
     protected View mRootView;
@@ -22,13 +21,13 @@ public abstract class BaseFragment extends Fragment {
         super.onCreate(savedInstanceState);
         mContent = getActivity();
         mBundle = getArguments();
-        ButterKnife.bind(mContent);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.bind(this, mRootView);
         initView();
         initData();
         return mRootView;

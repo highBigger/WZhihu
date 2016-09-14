@@ -2,8 +2,6 @@ package will.wzhihu.splash;
 
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -19,7 +17,6 @@ import com.facebook.imagepipeline.image.ImageInfo;
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -55,12 +52,13 @@ public class SplashActivity extends BaseActivity {
     private Subscriber<Splash> subscriber;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_splash);
-        WApplication.getInjector().inject(this);
-        ButterKnife.bind(this);
+    protected int getContentLayoutId() {
+        return R.layout.activity_splash;
+    }
 
+    @Override
+    protected void initView(View contentView) {
+        WApplication.getInjector().inject(this);
         Observable<Splash> observable = splashClient.getSplash();
         subscriber = new BaseSubscriber<Splash>() {
             @Override

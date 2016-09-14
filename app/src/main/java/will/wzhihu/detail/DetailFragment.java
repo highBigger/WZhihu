@@ -1,5 +1,7 @@
 package will.wzhihu.detail;
 
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import butterknife.Bind;
@@ -9,8 +11,10 @@ import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.fragment.BindingFragment;
 import will.wzhihu.common.presenter.PropertyChangeListener;
 import will.wzhihu.common.utils.StringUtils;
+import will.wzhihu.common.utils.ToastUtils;
 import will.wzhihu.common.widget.WToolbar;
 import will.wzhihu.common.widget.WrapWebView;
+import will.wzhihu.detail.binder.DetailToolbarBinder;
 import will.wzhihu.detail.binder.WebViewBinder;
 import will.wzhihu.detail.presenter.DetailPresenter;
 import will.wzhihu.main.binder.StoryBinder;
@@ -34,18 +38,26 @@ public class DetailFragment extends BindingFragment {
     private Story story;
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        story = getArguments().getParcelable(DetailActivity.PARAMS_STORY);
+        if (null == story) {
+            ToastUtils.toast("story is null finish it");
+            getActivity().finish();
+        }
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.fragment_detail;
     }
 
     @Override
     protected void prepareBinder(View view, CompositeBinder binder) {
-        story = getArguments().getParcelable(DetailActivity.PARAMS_STORY);
-        toolbar.setHeaderTitle(story.title);
-
         storyPresenter = new StoryPresenter();
         detailPresenter = new DetailPresenter(String.valueOf(story.id));
 
+        binder.add(new DetailToolbarBinder(toolbar, getActivity(), storyPresenter));
         binder.add(new StoryBinder(view, storyPresenter, false, false, false));
         binder.add(new WebViewBinder(webView, detailPresenter));
         if (StringUtils.isEmpty(story.image)) {

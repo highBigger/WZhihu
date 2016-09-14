@@ -13,14 +13,9 @@ public abstract class BindingFragment extends BaseFragment {
     private CompositeBinder mBinder;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        mBinder = new CompositeBinder();
-    }
-
-    @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mBinder = new CompositeBinder();
         prepareBinder(view, mBinder);
         mBinder.bind();
         updatePresenters();

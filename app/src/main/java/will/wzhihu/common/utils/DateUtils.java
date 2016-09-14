@@ -16,6 +16,12 @@ import will.wzhihu.common.log.Log;
 public class DateUtils {
     private static final String TAG = "DateUtils";
 
+    public static String getTodayDateString() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+        Date date = Calendar.getInstance().getTime();
+        return dateFormat.format(date);
+    }
+
     public static String getShowTime(String dateString) {
         boolean today = isToday(dateString);
         if (today) {

@@ -14,6 +14,12 @@ public class Latest {
     @SerializedName("top_stories")
     public List<Story> topStories;
 
+    public Latest(String date, List<Story> stories, List<Story> topStories) {
+        this.date = date;
+        this.stories = stories;
+        this.topStories = topStories;
+    }
+
     @Override
     public String toString() {
         return "Latest{" +

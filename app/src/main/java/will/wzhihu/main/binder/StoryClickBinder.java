@@ -24,6 +24,7 @@ public class StoryClickBinder implements Binder {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                presenter.setRead();
                 DetailActivity.start(presenter.getStory(), (Activity) view.getContext());
             }
         });

@@ -3,10 +3,15 @@ package will.wzhihu.main.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.StringDef;
+
 import com.google.gson.annotations.SerializedName;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.util.List;
+
+import will.wzhihu.common.cupboard.WColumn;
+import will.wzhihu.common.cupboard.WJSONFieldConverter;
 import will.wzhihu.common.model.FeedItem;
 import will.wzhihu.common.utils.CollectionUtils;
 import will.wzhihu.common.utils.StringUtils;
@@ -30,10 +35,14 @@ public class Story implements FeedItem , Parcelable{
     public static final String ITEM_TYPE_TOP_STORY = "top_story";
     public static final String ITEM_TYPE_DATE = "date";
 
+    public static final int TOP_STORY_ID = -1;
+    public static final int DATE_STORY_ID = -2;
+
     @StringDef({ITEM_TYPE_TOP_STORY, ITEM_TYPE_DATE, ITEM_TYPE_STORY})
     @Retention(RetentionPolicy.SOURCE)
     public @interface StoryItemType {}
 
+    @WColumn(fieldConverter = WJSONFieldConverter.class)
     public List<String> images;
 
     public int type;
@@ -53,6 +62,8 @@ public class Story implements FeedItem , Parcelable{
     public String date;
 
     public String image;
+
+    public boolean read;
 
     public void setItemType(@StoryItemType String itemType) {
        this.itemType = itemType;
@@ -110,6 +121,7 @@ public class Story implements FeedItem , Parcelable{
         dest.writeString(this.itemType);
         dest.writeString(this.date);
         dest.writeString(this.image);
+        dest.writeByte(this.read ? (byte) 1 : (byte) 0);
     }
 
     public Story() {
@@ -125,6 +137,7 @@ public class Story implements FeedItem , Parcelable{
         this.itemType = in.readString();
         this.date = in.readString();
         this.image = in.readString();
+        this.read = in.readByte() != 0;
     }
 
     public static final Creator<Story> CREATOR = new Creator<Story>() {

@@ -13,9 +13,9 @@ import will.wzhihu.main.presenter.StoryPresenter;
  */
 public class StoryBinder extends CompositeBinder {
 
-    public StoryBinder(View view, StoryPresenter storyPresenter) {
+    public StoryBinder(View view, StoryPresenter storyPresenter, boolean bindRead) {
         add(new StoryClickBinder(view, storyPresenter));
         add(new StoryImageBinder((SimpleDraweeView) view.findViewById(R.id.image), storyPresenter));
-        add(new StoryTitleBinder((TextView) view.findViewById(R.id.title), storyPresenter));
+        add(new StoryTitleBinder((TextView) view.findViewById(R.id.title), storyPresenter, bindRead));
     }
 }

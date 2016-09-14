@@ -42,7 +42,7 @@ public class TopStoryAdapter extends PagerAdapter {
 
         Story story = stories.get(position);
         StoryPresenter presenter = new StoryPresenter();
-        StoryBinder binder = new StoryBinder(view, presenter);
+        StoryBinder binder = new StoryBinder(view, presenter, false);
         binder.bind();
         presenter.updateData(position, story);
 

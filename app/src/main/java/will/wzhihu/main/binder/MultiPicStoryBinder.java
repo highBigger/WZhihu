@@ -14,7 +14,7 @@ public class MultiPicStoryBinder extends StoryBinder {
     private TextView multiPic;
 
     public MultiPicStoryBinder(final View view, final StoryPresenter presenter) {
-        super(view, presenter);
+        super(view, presenter, true);
 
         multiPic = (TextView) view.findViewById(R.id.multi_pic);
         presenter.addPropertyChangeListener("multiPic", new PropertyChangeListener() {

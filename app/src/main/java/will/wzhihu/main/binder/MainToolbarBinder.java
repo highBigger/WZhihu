@@ -5,7 +5,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import will.wzhihu.binder.ToolbarNavigationClickBinder;
 import will.wzhihu.common.binder.Binder;
 import will.wzhihu.common.binder.CompositeBinder;
 import will.wzhihu.common.utils.DateUtils;
@@ -34,7 +33,6 @@ public class MainToolbarBinder extends CompositeBinder {
     public MainToolbarBinder(final WToolbar toolbar, Activity activity, final RecyclerView recyclerView, MainPresenter mainPresenter) {
         this.toolbar = toolbar;
         this.mainPresenter = mainPresenter;
-        add(new ToolbarNavigationClickBinder(toolbar, activity));
         add(new Binder() {
             @Override
             public void bind() {

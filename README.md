@@ -3,9 +3,9 @@
 =======
 用知乎的API仿照了知乎日报几个页面
 
-![](/screenshot/main.jpg)
+![](/screenshot/main.png)
 
-![](/screenshot/detail.jpg)
+![](/screenshot/detail.png)
 
 用了四个接口：
 

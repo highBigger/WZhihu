@@ -2,9 +2,13 @@ package will.wzhihu.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Callable;
+
 import javax.inject.Inject;
+
 import rx.Observable;
 import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 import will.wzhihu.WApplication;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.store.StoryStore;
@@ -19,7 +23,7 @@ import will.wzhihu.main.model.Story;
 /**
  * @author wendeping
  */
-public class StoryFinder {
+public class StoryListFinder {
     private static final String TAG = "StoryFinder";
 
     @Inject
@@ -28,16 +32,30 @@ public class StoryFinder {
     @Inject
     StoryStore storyStore;
 
-    public StoryFinder() {
+    public StoryListFinder() {
         WApplication.getInjector().inject(this);
     }
 
     public Observable<Latest> getLatest() {
-        final List<Story> storiesByDate = storyStore.getStoriesByDate(DateUtils.getTodayDateString());
-        if (!CollectionUtils.isEmpty(storiesByDate)) {
-            Log.d(TAG, "get latest from db");
-            return Observable.just(migrateLatest(storiesByDate));
-        }
+        return Observable.fromCallable(new Callable<List<Story>>() {
+            @Override
+            public List<Story> call() throws Exception {
+                return storyStore.getStoriesByDate(DateUtils.getTodayDateString());
+            }
+        }).observeOn(Schedulers.io()).flatMap(new Func1<List<Story>, Observable<Latest>>() {
+            @Override
+            public Observable<Latest> call(List<Story> stories) {
+                if (CollectionUtils.isEmpty(stories)) {
+                    return getLatestFromRemote();
+                }
+
+                Log.d(TAG, "get latest from db");
+                return Observable.just(migrateLatest(stories));
+            }
+        });
+    }
+
+    private Observable<Latest> getLatestFromRemote() {
         return storyClient.getLatest().map(new Func1<Latest, Latest>() {
             @Override
             public Latest call(Latest latest) {
@@ -108,23 +126,34 @@ public class StoryFinder {
     }
 
     public Observable<Stories> getStories(final String currentDate) {
-        String beforeDay = DateUtils.subtractDay(currentDate);
-        final List<Story> storiesByDate = storyStore.getStoriesByDate(beforeDay);
-        if (CollectionUtils.isEmpty(storiesByDate)) {
-            Log.d(TAG, "load date %s story from network", currentDate);
-            return storyClient.getBefore(currentDate).map(new Func1<Stories, Stories>() {
-                @Override
-                public Stories call(Stories stories) {
-                    List<Story> storyList = convertStories(stories.date, stories.stories);
-                    storyStore.putAll(storyList);
-                    Log.d(TAG, "put date %s stories to store", currentDate);
-                    return new Stories(stories.date, storyList);
+        final String beforeDay = DateUtils.subtractDay(currentDate);
+        return Observable.fromCallable(new Callable<List<Story>>() {
+            @Override
+            public List<Story> call() throws Exception {
+                return storyStore.getStoriesByDate(beforeDay);
+            }
+        }).observeOn(Schedulers.io()).flatMap(new Func1<List<Story>, Observable<Stories>>() {
+            @Override
+            public Observable<Stories> call(List<Story> stories) {
+                if (CollectionUtils.isEmpty(stories)) {
+                    return getRemoteStory(currentDate);
                 }
-            });
-        } else {
-            Log.d(TAG, "load date %s story from db", currentDate);
-            return Observable.just(new Stories(beforeDay, filterTopStories(storiesByDate)));
-        }
+                Log.d(TAG, "load date %s story from db", currentDate);
+                return Observable.just(new Stories(beforeDay, filterTopStories(stories)));
+            }
+        });
+    }
+
+    private Observable<Stories> getRemoteStory(final String date) {
+        return storyClient.getBefore(date).map(new Func1<Stories, Stories>() {
+            @Override
+            public Stories call(Stories stories) {
+                List<Story> storyList = convertStories(stories.date, stories.stories);
+                storyStore.putAll(storyList);
+                Log.d(TAG, "put date %s stories to store", date);
+                return new Stories(stories.date, storyList);
+            }
+        });
     }
 
     private List<Story> filterTopStories(List<Story> stories) {
@@ -143,6 +172,7 @@ public class StoryFinder {
         List<Story> resultStories = new ArrayList<>();
         Story dateStory = new Story();
         dateStory.date = date;
+        dateStory.id = Story.DATE_STORY_ID;
         dateStory.setItemType(Story.ITEM_TYPE_DATE);
         resultStories.add(dateStory);
 

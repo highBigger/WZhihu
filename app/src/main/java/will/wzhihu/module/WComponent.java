@@ -3,7 +3,9 @@ package will.wzhihu.module;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import will.wzhihu.main.StoryFinder;
+import will.wzhihu.detail.DetailPresenter;
+import will.wzhihu.detail.StoryDetailFinder;
+import will.wzhihu.main.StoryListFinder;
 import will.wzhihu.main.presenter.MainPresenter;
 import will.wzhihu.main.presenter.StoryPresenter;
 import will.wzhihu.splash.SplashActivity;
@@ -22,6 +24,8 @@ import will.wzhihu.splash.SplashActivity;
 public interface WComponent {
     void inject(SplashActivity splashActivity);
     void inject(MainPresenter mainPresenter);
-    void inject(StoryFinder storyFinder);
+    void inject(StoryListFinder storyFinder);
+    void inject(StoryDetailFinder storyDetailFinder);
     void inject(StoryPresenter storyPresenter);
+    void inject(DetailPresenter detailPresenter);
 }

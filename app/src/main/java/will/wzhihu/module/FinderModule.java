@@ -4,7 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import will.wzhihu.main.StoryFinder;
+import will.wzhihu.detail.StoryDetailFinder;
+import will.wzhihu.main.StoryListFinder;
 
 /**
  * @author wendeping
@@ -15,7 +16,13 @@ public class FinderModule {
 
     @Singleton
     @Provides
-    public StoryFinder providesStoryFinder() {
-        return new StoryFinder();
+    public StoryListFinder providesStoryFinder() {
+        return new StoryListFinder();
+    }
+
+    @Singleton
+    @Provides
+    public StoryDetailFinder providesStoryDetailFinder() {
+        return new StoryDetailFinder();
     }
 }

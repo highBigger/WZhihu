@@ -4,6 +4,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import will.wzhihu.detail.client.RetrofitStoryDetailClient;
+import will.wzhihu.detail.client.StoryDetailClient;
 import will.wzhihu.main.client.RetrofitStoryClient;
 import will.wzhihu.main.client.StoryClient;
 import will.wzhihu.splash.client.RetrofitSplashClient;
@@ -26,5 +28,11 @@ public class ClientModule {
     @Provides
     StoryClient provideStoryClient() {
         return new RetrofitStoryClient();
+    }
+
+    @Singleton
+    @Provides
+    StoryDetailClient provideStoryDetailClient() {
+        return new RetrofitStoryDetailClient();
     }
 }

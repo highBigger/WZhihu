@@ -10,7 +10,7 @@ import will.wzhihu.WApplication;
 import will.wzhihu.common.log.Log;
 import will.wzhihu.common.presenter.RecyclerPresenter;
 import will.wzhihu.common.rxjava.LoadingPresenterSubscriber;
-import will.wzhihu.main.StoryFinder;
+import will.wzhihu.main.StoryListFinder;
 import will.wzhihu.main.model.Latest;
 import will.wzhihu.main.model.Stories;
 import will.wzhihu.main.model.Story;
@@ -22,7 +22,7 @@ public class MainPresenter extends RecyclerPresenter<Story> {
     private static final String TAG = "MainPresenter";
 
     @Inject
-    StoryFinder storyFinder;
+    StoryListFinder storyFinder;
 
     private List<Story> topStories;
 

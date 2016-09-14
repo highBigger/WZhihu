@@ -105,6 +105,7 @@ public class Story implements FeedItem , Parcelable{
             '}';
     }
 
+
     @Override
     public int describeContents() {
         return 0;
@@ -140,15 +141,4 @@ public class Story implements FeedItem , Parcelable{
         this.read = in.readByte() != 0;
     }
 
-    public static final Creator<Story> CREATOR = new Creator<Story>() {
-        @Override
-        public Story createFromParcel(Parcel source) {
-            return new Story(source);
-        }
-
-        @Override
-        public Story[] newArray(int size) {
-            return new Story[size];
-        }
-    };
 }

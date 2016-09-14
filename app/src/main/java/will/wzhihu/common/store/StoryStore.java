@@ -8,6 +8,7 @@ import java.util.List;
 import nl.qbusict.cupboard.Cupboard;
 import nl.qbusict.cupboard.DatabaseCompartment;
 import will.wzhihu.common.utils.SqlUtils;
+import will.wzhihu.detail.StoryDetail;
 import will.wzhihu.main.model.Story;
 
 /**
@@ -30,6 +31,7 @@ public class StoryStore extends BaseStore {
     @Override
     protected void registerEntities(Cupboard cupboard) {
         cupboard.register(Story.class);
+        cupboard.register(StoryDetail.class);
     }
 
     @Override
@@ -48,6 +50,10 @@ public class StoryStore extends BaseStore {
         db.execSQL("CREATE INDEX IF NOT EXISTS story_date ON " +
             getCupboard().getTable(Story.class) +
             " (date)");
+
+        db.execSQL("CREATE INDEX IF NOT EXISTS story_id ON " +
+            getCupboard().getTable(StoryDetail.class) +
+            " (id)");
     }
 
     public List<Story> getStoriesByDate(String date) {
@@ -73,5 +79,13 @@ public class StoryStore extends BaseStore {
                 }
             }
         });
+    }
+
+    public long putStoryDetail(StoryDetail detail) {
+        return getDatabaseCompartment().put(detail);
+    }
+
+    public StoryDetail getStoryDetail(String storyId) {
+        return getDatabaseCompartment().query(StoryDetail.class).withSelection("id = ?", storyId).get();
     }
 }

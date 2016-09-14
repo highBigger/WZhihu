@@ -16,7 +16,6 @@ import will.wzhihu.main.model.Story;
  * Created by taoming on 2016/9/9.
  */
 public class DetailFragment extends BindingFragment {
-
     @Bind(R.id.toolbar)
     WToolbar toolbar;
 

@@ -30,4 +30,5 @@
 
     <!--postView config-->
     <dimen name="post_view_left_padding">12dp</dimen>
+    <item format="float" name="image_aspect" type="dimen">1.8</item>
 </resources>

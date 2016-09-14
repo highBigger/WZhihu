@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<will.wzhihu.common.widget.AspectRatioFrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:CircleIndicator="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="240dp">
+    android:layout_height="220dp">
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager"
@@ -15,11 +15,11 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_gravity="center_horizontal|bottom"
-        CircleIndicator:ci_background="@color/indicator_default_circle"
-        CircleIndicator:ci_selected_background="@color/indicator_select_circle"
-        CircleIndicator:ci_mode="outside"
-        CircleIndicator:ci_gravity="center"
-        CircleIndicator:ci_radius="3dp"
-        CircleIndicator:ci_margin="5dp"
+        app:ci_background="@color/indicator_default_circle"
+        app:ci_selected_background="@color/indicator_select_circle"
+        app:ci_mode="outside"
+        app:ci_gravity="center"
+        app:ci_radius="3dp"
+        app:ci_margin="5dp"
         />
-</FrameLayout>
+</will.wzhihu.common.widget.AspectRatioFrameLayout>

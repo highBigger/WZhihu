@@ -14,7 +14,6 @@ import will.wzhihu.common.cupboard.WColumn;
 import will.wzhihu.common.cupboard.WJSONFieldConverter;
 import will.wzhihu.common.model.FeedItem;
 import will.wzhihu.common.utils.CollectionUtils;
-import will.wzhihu.common.utils.StringUtils;
 
 /**
  * @author wendeping
@@ -85,9 +84,10 @@ public class Story implements FeedItem , Parcelable{
     }
 
     public String getImage() {
-        if (StringUtils.isEqual(itemType, ITEM_TYPE_TOP_STORY)) {
-            return image;
-        }
+        return image;
+    }
+
+    public String getThumbnail() {
         return CollectionUtils.isEmpty(images) ? null : images.get(0);
     }
 
@@ -105,6 +105,9 @@ public class Story implements FeedItem , Parcelable{
             '}';
     }
 
+
+    public Story() {
+    }
 
     @Override
     public int describeContents() {
@@ -125,9 +128,6 @@ public class Story implements FeedItem , Parcelable{
         dest.writeByte(this.read ? (byte) 1 : (byte) 0);
     }
 
-    public Story() {
-    }
-
     protected Story(Parcel in) {
         this.images = in.createStringArrayList();
         this.type = in.readInt();
@@ -141,4 +141,15 @@ public class Story implements FeedItem , Parcelable{
         this.read = in.readByte() != 0;
     }
 
+    public static final Creator<Story> CREATOR = new Creator<Story>() {
+        @Override
+        public Story createFromParcel(Parcel source) {
+            return new Story(source);
+        }
+
+        @Override
+        public Story[] newArray(int size) {
+            return new Story[size];
+        }
+    };
 }

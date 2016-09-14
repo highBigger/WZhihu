@@ -17,7 +17,7 @@ public class MultiPicStoryBinder extends StoryBinder {
     TextView multiPic;
 
     public MultiPicStoryBinder(final View view, final StoryPresenter presenter) {
-        super(view, presenter, true);
+        super(view, presenter, true, true);
         ButterKnife.bind(this, view);
         presenter.addPropertyChangeListener("multiPic", new PropertyChangeListener() {
             @Override

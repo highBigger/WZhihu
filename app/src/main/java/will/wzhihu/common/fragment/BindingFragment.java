@@ -28,7 +28,7 @@ public abstract class BindingFragment extends BaseFragment {
 
     protected abstract void prepareBinder(View view, final CompositeBinder binder);
 
-    protected void updatePresenters() {}
+    protected abstract void updatePresenters();
 
 
     @Override

@@ -3,7 +3,7 @@ package will.wzhihu.module;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import will.wzhihu.detail.DetailPresenter;
+import will.wzhihu.detail.presenter.DetailPresenter;
 import will.wzhihu.detail.StoryDetailFinder;
 import will.wzhihu.main.StoryListFinder;
 import will.wzhihu.main.presenter.MainPresenter;

@@ -25,4 +25,8 @@
         <attr name="menuEnable" format="boolean" />
 
     </declare-styleable>
+
+    <declare-styleable name="AspectRatioFrameLayout">
+        <attr name="aspect" format="float"/>
+    </declare-styleable>
 </resources>

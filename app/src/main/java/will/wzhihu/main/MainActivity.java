@@ -38,6 +38,10 @@ public class MainActivity extends BindingActivity {
         binder.add(new MainToolbarBinder(toolbar, this, recyclerView, mainPresenter));
         binder.add(new MainListBinder(this, mainPresenter, recyclerView));
         binder.add(new RefreshBinder(refreshLayout, mainPresenter));
+    }
+
+    @Override
+    protected void updatePresenters() {
         mainPresenter.loadLatest();
     }
 }

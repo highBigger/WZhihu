@@ -1,6 +1,7 @@
 package will.wzhihu.detail.client;
 
 import rx.Observable;
+import rx.schedulers.Schedulers;
 import will.wzhihu.common.client.RetrofitBaseClient;
 import will.wzhihu.detail.StoryDetail;
 
@@ -11,6 +12,6 @@ public class RetrofitStoryDetailClient extends RetrofitBaseClient<StoryDetailEnd
 
     @Override
     public Observable<StoryDetail> getStory(String storyId) {
-        return getEndpoint().getStory(storyId);
+        return getEndpoint().getStory(storyId).observeOn(Schedulers.io());
     }
 }

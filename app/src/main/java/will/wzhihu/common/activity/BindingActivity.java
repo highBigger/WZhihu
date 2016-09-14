@@ -22,8 +22,8 @@ public abstract class BindingActivity extends BaseActivity {
     protected abstract void prepareBinder(View view, final CompositeBinder binder);
 
 
-    protected void updatePresenters() {
-    }
+    protected abstract void updatePresenters();
+
 
     @Override
     public void onDestroy() {

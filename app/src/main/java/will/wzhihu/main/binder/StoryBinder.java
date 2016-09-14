@@ -22,10 +22,16 @@ public class StoryBinder extends CompositeBinder {
     @Bind(R.id.title)
     TextView title;
 
-    public StoryBinder(View view, StoryPresenter storyPresenter, boolean bindRead) {
+    public StoryBinder(View view, StoryPresenter storyPresenter, boolean bindRead, boolean thumbnail) {
+        this(view, storyPresenter, bindRead, thumbnail, true);
+    }
+
+    public StoryBinder(View view, StoryPresenter storyPresenter, boolean bindRead, boolean thumbnail, boolean clickable) {
         ButterKnife.bind(this, view);
-        add(new StoryClickBinder(view, storyPresenter));
-        add(new StoryImageBinder(image, storyPresenter));
+        if (clickable) {
+            add(new StoryClickBinder(view, storyPresenter));
+        }
+        add(new StoryImageBinder(image, storyPresenter, thumbnail));
         add(new StoryTitleBinder(title, storyPresenter, bindRead));
     }
 }

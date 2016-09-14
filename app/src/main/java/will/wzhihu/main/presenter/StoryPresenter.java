@@ -31,13 +31,10 @@ public class StoryPresenter extends BasePresenter implements ItemPresentationMod
     }
 
     public String getTitle() {
-        return story == null ? null : story.title;
+        return story.title;
     }
 
     public String getImage() {
-        if (story == null) {
-            return null;
-        }
         return story.getImage();
     }
 
@@ -63,5 +60,14 @@ public class StoryPresenter extends BasePresenter implements ItemPresentationMod
 
     public boolean getRead() {
         return story.read;
+    }
+
+    public String getThumbnail() {
+        return story.getThumbnail();
+    }
+
+    public void setImage(String image) {
+        story.image = image;
+        firePropertyChange("image");
     }
 }

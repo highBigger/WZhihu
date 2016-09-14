@@ -10,7 +10,6 @@ import will.wzhihu.common.binder.CompositeBinder;
  * @author dusiyu
  */
 public abstract class BindingFragment extends BaseFragment {
-
     private CompositeBinder mBinder;
 
     @Override
@@ -27,11 +26,10 @@ public abstract class BindingFragment extends BaseFragment {
         updatePresenters();
     }
 
-    protected void prepareBinder(View view, final CompositeBinder binder) {
-    }
+    protected abstract void prepareBinder(View view, final CompositeBinder binder);
 
-    protected void updatePresenters() {
-    }
+    protected void updatePresenters() {}
+
 
     @Override
     public void onDestroy() {
